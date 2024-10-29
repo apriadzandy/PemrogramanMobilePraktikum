@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance; // Inisialisasi Firestore
   RxBool isLoading = false.obs;
 
   @override
@@ -15,13 +17,13 @@ class AuthController extends GetxController {
     checkLoginStatus(); // Cek status login saat controller diinisialisasi
   }
 
-   Future<void> checkLoginStatus() async {
+  Future<void> checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false; // Ambil status login
 
     if (isLoggedIn) {
-      // Jika sudah login, navigasikan ke halaman utama
-      Get.off(MainView());
+      // Jika pengguna sudah login, arahkan ke halaman utama
+      Get.off(MainView()); // Ganti '/main' dengan rute halaman utama Anda
     }
   }
 
@@ -29,10 +31,17 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
 
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      // Membuat data user baru di Firestore
+      await _firestore.collection('users').doc(userCredential.user?.uid).set({
+        'email': email,
+        'username': email.split('@')[0], // Mengambil username dari email
+        'profileImageUrl': '', // Gambar profil default
+      });
 
       Get.snackbar(
         'Success',
@@ -56,7 +65,7 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
 
-      await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -64,6 +73,16 @@ class AuthController extends GetxController {
       // Simpan status login ke Shared Preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
+
+      // Cek jika data pengguna sudah ada di Firestore, jika tidak buat baru
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(userCredential.user?.uid).get();
+      if (!userDoc.exists) {
+        await _firestore.collection('users').doc(userCredential.user?.uid).set({
+          'email': email,
+          'username': email.split('@')[0],
+          'profileImageUrl': '',
+        });
+      }
 
       Get.snackbar(
         'Success',

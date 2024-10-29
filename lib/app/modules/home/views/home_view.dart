@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laund/app/modules/home/controllers/profile_controller.dart';
 import 'package:laund/app/modules/home/views/Laundry_detail_view.dart';
-import 'package:laund/app/modules/home/views/weather_view.dart'; // Ganti dengan path WebView yang sesuai
+import 'package:laund/app/modules/home/views/weather_view.dart'; 
 import 'package:laund/app/modules/home/views/webview_page.dart';
 import 'package:laund/app/modules/home/widgets/laundry_card.dart';
 import 'package:laund/app/modules/home/widgets/search_widget.dart';
 import 'package:laund/app/modules/home/controllers/home_controller.dart';
-import 'package:laund/app/modules/home/controllers/Setting_controller.dart'; // Impor SettingController
 
 class HomeView extends StatelessWidget {
+  final ProfileController profileController = Get.put(ProfileController());
   final HomeController homeController = Get.put(HomeController());
-  final SettingController settingController = Get.find(); // Ambil instance SettingController yang sudah ada
   final TextEditingController searchController = TextEditingController();
   final List<String> items = ['Item 1', 'Item 2', 'Item 3'];  // Contoh data
   List<String> filteredItems = [];
@@ -34,18 +34,15 @@ class HomeView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            Obx(() {
-              // Menampilkan nama yang disimpan di SettingController secara reaktif
-              return Text(
-                settingController.username.value.isNotEmpty 
-                    ? settingController.username.value
-                    : 'Pengguna', // Jika nama belum diisi, tampilkan 'Pengguna'
-                style: TextStyle(
+            Text(
+                    profileController.username.value.isNotEmpty
+                        ? profileController.username.value
+                        : 'User Name',
+                  style: TextStyle(
                   color: Colors.blueGrey,
                   fontSize: 18,
                 ),
-              );
-            }),
+                  ),
           ],
         ),
         actions: [
