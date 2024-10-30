@@ -1,97 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:laund/app/modules/home/controllers/identify_controller.dart';
 
-class ChatView extends StatefulWidget {
+
+class ChatView extends StatelessWidget {
   final String laundryName;
+  final IdentifyController identifyController = Get.put(IdentifyController());
 
   ChatView({required this.laundryName});
-
-  @override
-  _ChatViewState createState() => _ChatViewState();
-}
-
-class _ChatViewState extends State<ChatView> {
-  List<String> messages = []; // Daftar pesan yang akan ditampilkan
-  final TextEditingController _messageController = TextEditingController();
-
-  void _sendMessage() {
-    if (_messageController.text.isNotEmpty) {
-      setState(() {
-        messages.add(_messageController.text); // Menambahkan pesan baru ke daftar
-        _messageController.clear(); // Menghapus teks yang dimasukkan
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue, // Warna AppBar biru
-        title: Text(
-          widget.laundryName,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        backgroundColor: Colors.blue,
+        title: Text(laundryName, style: TextStyle(fontWeight: FontWeight.bold)),
       ),
-      body: Column(
+      body: Obx(() {
+        return identifyController.isIdentityFilled.value ? _buildChat() : _buildIdentityForm();
+        //jika identitas terisi, tampilkan chat. jika tidak, tampilkan form
+      }),
+    );
+  }
+
+  Widget _buildIdentityForm() { //membuat form
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.blue[50], // Warna latar belakang pesan
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      messages[index],
-                      style: TextStyle(color: Colors.blue[800]), // Warna teks pesan
-                    ),
-                  ),
-                );
-              },
-            ),
+          TextField(
+            controller: identifyController.nameController,
+            decoration: InputDecoration(labelText: 'Nama', border: OutlineInputBorder()),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Ketik pesan...',
-                      hintStyle: TextStyle(color: Colors.blueGrey), // Warna teks hint
-                      filled: true,
-                      fillColor: Colors.blue[50], // Warna latar belakang TextField
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide.none, // Menghilangkan garis tepi
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.send, color: Colors.blue), // Warna ikon
-                  onPressed: _sendMessage, // Mengirim pesan saat tombol ditekan
-                  color: Colors.blue, // Warna latar belakang tombol
-                  padding: EdgeInsets.all(12), // Ukuran padding
-                  iconSize: 30, // Ukuran ikon
-                ),
-              ],
-            ),
+          SizedBox(height: 10),
+          TextField(
+            controller: identifyController.phoneController,
+            decoration: InputDecoration(labelText: 'Nomor Telepon', border: OutlineInputBorder()),
+          ),
+          SizedBox(height: 10),
+          TextField(
+            controller: identifyController.addressController,
+            decoration: InputDecoration(labelText: 'Alamat', border: OutlineInputBorder()),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton( //mengirim data identitas ke controller jika ditekan
+            onPressed: identifyController.submitIdentity,
+            child: Text('Submit'),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildChat() {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: identifyController.messages.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(identifyController.messages[index], style: TextStyle(color: Colors.blue[800])),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: identifyController.messageController,
+                  decoration: InputDecoration(
+                    hintText: 'Ketik pesan...',
+                    hintStyle: TextStyle(color: Colors.blueGrey),
+                    filled: true,
+                    fillColor: Colors.blue[50],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.send, color: Colors.blue),
+                onPressed: identifyController.sendMessage,
+                padding: EdgeInsets.all(12),
+                iconSize: 30,
+              ),
+            ],
+          ),
+        ),
+        ElevatedButton(
+          onPressed: identifyController.showIdentity,
+          child: Text('Read Identity'),
+        ),
+      ],
     );
   }
 }

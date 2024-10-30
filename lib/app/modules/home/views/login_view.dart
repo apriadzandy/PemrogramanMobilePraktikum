@@ -37,13 +37,11 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Logo or Icon
               Image.asset(
                 'assets/Logo/logoAPP.PNG',
                 height: 120,
               ),
               const SizedBox(height: 24),
-              // Title Text
               Text(
                 'Welcome in Laundry APP!',
                 textAlign: TextAlign.center,

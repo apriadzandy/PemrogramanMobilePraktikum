@@ -21,10 +21,7 @@ class AuthController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false; // Ambil status login
 
-    if (isLoggedIn) {
-      // Jika pengguna sudah login, arahkan ke halaman utama
-      Get.off(MainView()); // Ganti '/main' dengan rute halaman utama Anda
-    }
+    
   }
 
   Future<void> registerUser(String email, String password) async {
