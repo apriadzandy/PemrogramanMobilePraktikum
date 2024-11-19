@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laund/app/modules/home/controllers/profile_controller.dart';
+import 'package:laund/app/modules/home/controllers/voice_controller.dart'; // Import VoiceController
 import 'package:laund/app/modules/home/views/Laundry_detail_view.dart';
-import 'package:laund/app/modules/home/views/weather_view.dart'; 
+import 'package:laund/app/modules/home/views/weather_view.dart';
 import 'package:laund/app/modules/home/views/webview_page.dart';
 import 'package:laund/app/modules/home/widgets/laundry_card.dart';
 import 'package:laund/app/modules/home/widgets/search_widget.dart';
@@ -11,14 +12,21 @@ import 'package:laund/app/modules/home/controllers/home_controller.dart';
 class HomeView extends StatelessWidget {
   final ProfileController profileController = Get.put(ProfileController());
   final HomeController homeController = Get.put(HomeController());
+  final VoiceController voiceController = Get.put(VoiceController()); // Gunakan VoiceController
   final TextEditingController searchController = TextEditingController();
-  final List<String> items = ['Item 1', 'Item 2', 'Item 3'];  // Contoh data
+  final List<String> items = ['Item 1', 'Item 2', 'Item 3']; // Contoh data
   List<String> filteredItems = [];
 
   @override
   Widget build(BuildContext context) {
     // Awalnya, semua item ditampilkan
     filteredItems = items;
+
+    // Memastikan suara hanya diputar setelah login berhasil
+    if (profileController.username.value.isNotEmpty) {
+      // Jika username ada, maka login berhasil, putar suara notifikasi
+      voiceController.speak("Selamat datang di aplikasi Laundry!");
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -35,14 +43,14 @@ class HomeView extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-                    profileController.username.value.isNotEmpty
-                        ? profileController.username.value
-                        : 'User Name',
-                  style: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 18,
-                ),
-                  ),
+              profileController.username.value.isNotEmpty
+                  ? profileController.username.value
+                  : 'User Name',
+              style: TextStyle(
+                color: Colors.blueGrey,
+                fontSize: 18,
+              ),
+            ),
           ],
         ),
         actions: [
@@ -55,7 +63,7 @@ class HomeView extends StatelessWidget {
           ),
           // Tombol cuaca
           IconButton(
-            icon: Icon(Icons.water), 
+            icon: Icon(Icons.water),
             onPressed: () {
               Get.to(WeatherView()); // Navigasi ke halaman weather
             },

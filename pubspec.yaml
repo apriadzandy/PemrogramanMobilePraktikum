@@ -46,6 +46,9 @@ dependencies:
   flutter_local_notifications: ^17.2.4
   cloud_firestore: ^5.4.4
   firebase_storage: ^12.3.4
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.2.0
+  audioplayers: ^6.1.0
   
 
 dev_dependencies:

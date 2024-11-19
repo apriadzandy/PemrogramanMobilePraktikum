@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laund/app/modules/home/controllers/profile_controller.dart';
-import 'package:laund/app/modules/home/views/profile_settings_view.dart'; // Import halaman baru
 import 'package:laund/app/modules/home/controllers/auth_controller.dart';
+import 'package:laund/app/modules/home/views/sound_setting_view.dart'; // Import SoundSettingView
 
 class ProfileView extends StatelessWidget {
   final ProfileController profileController = Get.put(ProfileController());
@@ -14,7 +14,7 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Profile'),
         backgroundColor: Colors.blueAccent,
-        elevation: 0, // Menghilangkan bayangan di AppBar
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -38,7 +38,7 @@ class ProfileView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue[900], // Warna teks biru gelap
+                      color: Colors.blue[900],
                     ),
                   ),
                 ],
@@ -48,17 +48,16 @@ class ProfileView extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  _buildListTile(Icons.shopping_cart, 'Keranjang / My Order', () {
-                    // Aksi ketika Keranjang/My Order ditekan
-                  }),
-                  _buildListTile(Icons.history, 'History', () {
-                    // Aksi ketika History ditekan
-                  }),
+                  _buildListTile(Icons.shopping_cart, 'Keranjang / My Order', () {}),
+                  _buildListTile(Icons.history, 'History', () {}),
                   _buildListTile(Icons.settings, 'Setting Profile', () {
-                    Get.to(ProfileSettingsView());
+                    // Navigate to Profile Settings
+                  }),
+                  _buildListTile(Icons.volume_up, 'Sound Settings', () {
+                    Get.to(SoundSettingView()); // Navigate to Sound Setting View
                   }),
                   _buildListTile(Icons.logout, 'Logout', () {
-                    authController.logoutUser(); // Panggil metode logout
+                    authController.logoutUser(); // Logout
                   }, isLogout: true),
                 ],
               ),
@@ -72,19 +71,15 @@ class ProfileView extends StatelessWidget {
   Widget _buildListTile(IconData icon, String title, VoidCallback onTap, {bool isLogout = false}) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8),
-      elevation: 4, // Bayangan yang lebih halus
+      elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), // Rounded corners
+        borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
         leading: Icon(icon, color: isLogout ? Colors.red : Colors.blue),
         title: Text(
           title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Colors.black87, // Teks hitam lembut
-          ),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black87),
         ),
         onTap: onTap,
       ),
