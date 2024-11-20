@@ -1,8 +1,8 @@
 // lib/views/main_view.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laund/app/modules/Chat/views/chat_list_view.dart';
 import 'package:laund/app/modules/home/controllers/main_controller.dart';
-import 'package:laund/app/modules/home/views/chat_list.dart';
 import 'package:laund/app/modules/home/views/home_view.dart';
 import 'package:laund/app/modules/home/views/profile_view.dart';
 

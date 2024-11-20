@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/views/chat_view.dart';
 import '../controllers/laundry_detail_controller.dart';
 
 class LaundryDetailView extends StatelessWidget {
@@ -108,7 +107,6 @@ class LaundryDetailView extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: ElevatedButton(
           onPressed: () {
-            Get.to(ChatView(laundryName: 'ida laundry'));
             print('Laundry dipilih!');
           },
           child: Text('Pilih Laundry'),
