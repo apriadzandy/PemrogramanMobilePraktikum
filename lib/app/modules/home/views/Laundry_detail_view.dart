@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laund/app/modules/Location_Henddler/views/location_view.dart';
 import '../controllers/laundry_detail_controller.dart';
 
 class LaundryDetailView extends StatelessWidget {
@@ -38,10 +39,19 @@ class LaundryDetailView extends StatelessWidget {
                     title,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    distance,
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        Get.to(LocationView());
+                      },
+                      label: Text('Lihat Detail Alamat', style: TextStyle(color: Colors.black),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 46, 152, 238),
+                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   Text(
                     'Rating: $rating',
                     style: TextStyle(fontSize: 16),

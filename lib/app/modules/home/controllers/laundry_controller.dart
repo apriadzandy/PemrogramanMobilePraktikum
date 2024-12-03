@@ -16,7 +16,7 @@ class LaundryController extends GetxController {
         title: 'Ida Laundry',
         imageUrl: 'assets/images/gambar1.png',
         rating: 4.8,
-        distance: '0.5 km',
+        distance: '0.20 km',
         description: 'Laundry cepat dan bersih.',
         priceList: 'Cuci Kering: Rp. 10.000\nCuci Basah: Rp. 15.000',
       ),

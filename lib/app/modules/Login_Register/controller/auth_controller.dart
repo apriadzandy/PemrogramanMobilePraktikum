@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/views/login_view.dart';
-import 'package:laund/app/modules/home/views/main_view.dart';
+import 'package:laund/app/modules/Login_Register/views/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
@@ -24,7 +23,7 @@ class AuthController extends GetxController {
     
     if (isLoggedIn) {
       // Jika pengguna sudah login, arahkan ke halaman utama
-      Get.offNamed ('/main'); // Ganti '/main' dengan rute halaman utama Anda
+      Get. offNamed ('/main'); // Ganti '/main' dengan rute halaman utama Anda
     }
   }
 

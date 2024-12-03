@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/controllers/profile_controller.dart';
-import 'package:laund/app/modules/home/controllers/auth_controller.dart';
+import 'package:laund/app/modules/Profile/controller/profile_controller.dart';
+import 'package:laund/app/modules/Login_Register/controller/auth_controller.dart';
+import 'package:laund/app/modules/Profile/views/profile_settings_view.dart';
 import 'package:laund/app/modules/home/views/sound_setting_view.dart'; // Import SoundSettingView
 
 class ProfileView extends StatelessWidget {
@@ -51,7 +52,7 @@ class ProfileView extends StatelessWidget {
                   _buildListTile(Icons.shopping_cart, 'Keranjang / My Order', () {}),
                   _buildListTile(Icons.history, 'History', () {}),
                   _buildListTile(Icons.settings, 'Setting Profile', () {
-                    // Navigate to Profile Settings
+                    Get.to(ProfileSettingsView());
                   }),
                   _buildListTile(Icons.volume_up, 'Sound Settings', () {
                     Get.to(SoundSettingView()); // Navigate to Sound Setting View

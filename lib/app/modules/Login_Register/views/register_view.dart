@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/controllers/auth_controller.dart';
-import 'package:laund/app/modules/home/views/register_view.dart';
+import 'package:laund/app/modules/Login_Register/controller/auth_controller.dart';
+import 'package:laund/app/modules/Login_Register/views/login_view.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final AuthController _authController = Get.find<AuthController>();
+class _RegisterPageState extends State<RegisterPage> {
+  final AuthController _authController = Get.put(AuthController());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _authController.checkLoginStatus();
-  }
 
   @override
   void dispose() {
@@ -37,13 +31,12 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset(
-                'assets/Logo/logoAPP.PNG',
-                height: 120,
-              ),
+              // Logo from local asset (optional, can use the same logo as LoginPage)
+              
               const SizedBox(height: 24),
+              // Title Text
               Text(
-                'Welcome in Laundry APP!',
+                'Create an Account',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
@@ -53,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Please log in to continue',
+                'Sign up to get started',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -95,13 +88,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 32),
-              // Login Button
+              // Register Button
               Obx(() {
                 return ElevatedButton(
                   onPressed: _authController.isLoading.value
                       ? null
                       : () {
-                          _authController.loginUser(
+                          _authController.registerUser(
                             _emailController.text,
                             _passwordController.text,
                           );
@@ -116,26 +109,26 @@ class _LoginPageState extends State<LoginPage> {
                   child: _authController.isLoading.value
                       ? CircularProgressIndicator(color: Colors.white)
                       : Text(
-                          'Log In',
+                          'Register',
                           style: TextStyle(fontSize: 18),
                         ),
                 );
               }),
               const SizedBox(height: 16),
-              // Sign Up Option
+              // Login Option
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    'Already have an account?',
                     style: TextStyle(color: Colors.blueGrey[700]),
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.to(RegisterPage());
+                      Get.off(LoginPage());
                     },
                     child: Text(
-                      'Sign Up',
+                      'Log In',
                       style: TextStyle(
                         color: Colors.blue[700],
                         fontWeight: FontWeight.bold,

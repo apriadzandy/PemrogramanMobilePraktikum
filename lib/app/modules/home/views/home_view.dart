@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/controllers/location_controller.dart';
-import 'package:laund/app/modules/home/controllers/profile_controller.dart';
+import 'package:laund/app/modules/Location_Henddler/controller/location_controller.dart';
+import 'package:laund/app/modules/Profile/controller/profile_controller.dart';
 import 'package:laund/app/modules/home/controllers/voice_controller.dart'; // Import VoiceController
 import 'package:laund/app/modules/home/views/Laundry_detail_view.dart';
-import 'package:laund/app/modules/home/views/location_view.dart'; // Pastikan LocationView sudah ada
 import 'package:laund/app/modules/home/views/weather_view.dart';
 import 'package:laund/app/modules/home/views/webview_page.dart';
 import 'package:laund/app/modules/home/widgets/laundry_card.dart';
@@ -57,14 +56,6 @@ class HomeView extends StatelessWidget {
           ],
         ),
         actions: [
-          // Tombol lokasi
-          IconButton(
-            icon: Icon(Icons.location_on),
-            onPressed: () async {
-              await locationController.getCurrentLocation(); // Memanggil fungsi getCurrentLocation
-              Get.to(LocationView()); // Navigasi ke halaman LocationView setelah mendapatkan lokasi
-            },
-          ),
           // Tombol WebView
           IconButton(
             icon: Icon(Icons.language), // Ikon untuk WebView
@@ -101,7 +92,7 @@ class HomeView extends StatelessWidget {
             onTap: () {
               Get.to(LaundryDetailView(), arguments: {
                 'title': 'Ida Laundry',
-                'distance': '0.5 km',
+                'distance': '0.20 km',
                 'rating': 4.8,
                 'imageUrl': 'assets/images/gambar1.png',
               });

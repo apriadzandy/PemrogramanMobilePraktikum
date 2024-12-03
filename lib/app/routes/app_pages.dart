@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:laund/app/modules/home/views/login_view.dart';
+import 'package:laund/app/modules/Login_Register/views/login_view.dart';
 import 'package:laund/app/modules/home/views/main_view.dart'; // Pastikan MainView sudah ada
 
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laund/app/modules/home/controllers/speech_controller.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class SearchWidget extends StatelessWidget {
   final TextEditingController searchController;

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:laund/app/modules/home/controllers/user_controller.dart';
 import 'package:laund/app/routes/app_pages.dart';
-import 'package:laund/app/modules/home/controllers/auth_controller.dart'; // Import AuthController
+import 'package:laund/app/modules/Login_Register/controller/auth_controller.dart'; // Import AuthController
 import 'package:laund/notification_handler.dart';
 
 
