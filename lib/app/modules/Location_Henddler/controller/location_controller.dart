@@ -5,21 +5,21 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LocationController extends GetxController {
   var currentLocation = ''.obs;
-  var currentAddress = ''.obs; // Menyimpan nama lokasi
+  var currentAddress = ''.obs; 
   var destination = 'Lat: -7.876099, Long: 112.576474'.obs;
-  var destinationAddress = 'Jl. Raya Karangan No.59, Jakaan, Bonowarih, Kec. Karang Ploso, Kabupaten Malang, Jawa Timur 65152'.obs; // Nama lokasi tujuan
+  var destinationAddress = 'Jl. Raya Karangan No.59, Jakaan, Bonowarih, Kec. Karang Ploso, Kabupaten Malang, Jawa Timur 65152'.obs; 
   double destLatitude = -7.876099;
   double destLongitude = 112.576474;
 
   @override
   void onInit() {
     super.onInit();
-    getCurrentLocation();
+    getCurrentLocation(); 
   }
 
   Future<void> getCurrentLocation() async {
     try {
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled(); // Mengecek apakah layanan lokasi aktif.
       if (!serviceEnabled) {
         throw Exception('Location services are disabled.');
       }
@@ -48,7 +48,7 @@ class LocationController extends GetxController {
   Future<void> getAddressFromLatLng(double latitude, double longitude) async {
     try {
       List<Placemark> placemarks =
-          await placemarkFromCoordinates(latitude, longitude);
+          await placemarkFromCoordinates(latitude, longitude);// Mengonversi koordinat ke daftar alamat.
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
         currentAddress.value =

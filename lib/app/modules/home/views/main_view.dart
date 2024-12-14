@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laund/app/modules/Chat/views/chat_list_view.dart';
+import 'package:laund/app/modules/Profile/views/Profile_view.dart';
 import 'package:laund/app/modules/home/controllers/main_controller.dart';
 import 'package:laund/app/modules/home/views/home_view.dart';
-import 'package:laund/app/modules/profile/views/profile_view.dart';
+
 
 class MainView extends StatelessWidget {
   final MainController controller = Get.put(MainController());  // Inject MainController
