@@ -11,7 +11,7 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('History'),
-        backgroundColor: Colors.orange[800],
+        backgroundColor: Colors.blueAccent,
         elevation: 0,
       ),
       body: Padding(
@@ -56,7 +56,7 @@ class HistoryView extends StatelessWidget {
                           'Tanggal: ${historyController.history[index]['date']} - Rp ${historyController.history[index]['price']}',
                           style: TextStyle(fontSize: 16, color: Colors.green[700]),
                         ),
-                        leading: Icon(Icons.history, color: Colors.orange[800]),
+                        leading: Icon(Icons.history, color: Colors.blueAccent),
                         trailing: IconButton(
                           icon: Icon(Icons.remove_circle_outline, color: Colors.red),
                           onPressed: () {

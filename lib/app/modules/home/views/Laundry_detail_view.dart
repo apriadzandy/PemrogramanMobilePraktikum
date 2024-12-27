@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:laund/app/modules/Location_Henddler/views/location_view.dart';
+import 'package:laund/app/modules/myorder/view/myorder_view.dart';
 import '../controllers/laundry_detail_controller.dart';
 
 class LaundryDetailView extends StatelessWidget {
@@ -101,7 +102,7 @@ class LaundryDetailView extends StatelessWidget {
                       case 'penilaian':
                         return Text('Isi penilaian lengkap...');
                       default:
-                        return Container(); // Kosong jika tidak ada yang dipilih
+                        return Text('deskripsi');
                     }
                   }),
                   SizedBox(height: 20),
@@ -117,6 +118,7 @@ class LaundryDetailView extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: ElevatedButton(
           onPressed: () {
+            Get.to(MyOrderView());
             print('Laundry dipilih!');
           },
           child: Text('Pilih Laundry'),

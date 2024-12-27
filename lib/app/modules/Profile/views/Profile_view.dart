@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:laund/app/modules/Profile/controller/profile_controller.dart';
 import 'package:laund/app/modules/Login_Register/controller/auth_controller.dart';
 import 'package:laund/app/modules/Profile/views/profile_settings_view.dart';
+import 'package:laund/app/modules/history/view/history_view.dart';
 import 'package:laund/app/modules/home/views/sound_setting_view.dart';
-import 'package:laund/app/modules/myorder/controller/myorder_controller.dart';
 import 'package:laund/app/modules/myorder/view/myorder_view.dart'; // Import SoundSettingView
 
 class ProfileView extends StatelessWidget {
@@ -54,7 +54,10 @@ class ProfileView extends StatelessWidget {
                   _buildListTile(Icons.shopping_cart, 'Keranjang / My Order', () {
                     Get.to(MyOrderView());
                   }),
-                  _buildListTile(Icons.history, 'History', () {}),
+                  _buildListTile(Icons.history, 'History', () {
+                    Get.to(HistoryView());
+                  }),
+
                   _buildListTile(Icons.settings, 'Setting Profile', () {
                     Get.to(ProfileSettingsView());
                   }),

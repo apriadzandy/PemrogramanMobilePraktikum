@@ -11,7 +11,7 @@ class MyOrderView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Order'),
-        backgroundColor: Colors.orange[800],
+        backgroundColor: Colors.blueAccent,
         elevation: 0,
       ),
       body: Padding(
@@ -56,7 +56,7 @@ class MyOrderView extends StatelessWidget {
                           'Rp ${myOrderController.orders[index]['price']}',
                           style: TextStyle(fontSize: 16, color: Colors.green[700]),
                         ),
-                        leading: Icon(Icons.local_laundry_service, color: Colors.orange[800]),
+                        leading: Icon(Icons.local_laundry_service, color: Colors.blueAccent),
                         trailing: IconButton(
                           icon: Icon(Icons.remove_circle_outline, color: Colors.red),
                           onPressed: () {
@@ -96,7 +96,7 @@ class MyOrderView extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange[800], // Background color
+          backgroundColor: Colors.blueAccent, // Background color
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
         ),
         onPressed: () {

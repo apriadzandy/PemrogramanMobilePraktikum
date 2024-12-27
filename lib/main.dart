@@ -7,16 +7,14 @@ import 'package:laund/app/modules/Login_Register/controller/auth_controller.dart
 import 'package:laund/dependency_injection.dart';
 import 'package:laund/notification_handler.dart';
 
-
 void main() async {
   DependencyInjection.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  // Mendaftarkan AuthController dan SettingController
+  // Mendaftarkan AuthController dan UserController
   Get.put(AuthController());
   Get.put(UserController()); 
- 
 
   // Inisialisasi notifikasi
   NotificationHandler notificationHandler = NotificationHandler();
@@ -30,8 +28,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login', // Set initial route ke halaman login
+      initialRoute: '/splash', // Set initial route ke halaman splash
       getPages: AppPages.routes,
     );
   }
 }
+
